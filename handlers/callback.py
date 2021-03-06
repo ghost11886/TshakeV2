@@ -414,9 +414,8 @@ def updateCallback(client, callback_query,redis):
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
         Bot("editMessageText",{"chat_id":chatID,"text":r.replylistEm,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
-        
-if date[0] == "showAUreplylist":
-      li = redis.hkeys("{}Nbot:{}:AUreplys".format(BOT_ID,chatID))
+ if date[0] == "showAUreplylist":
+	  li = redis.hkeys("{}Nbot:{}:AUreplys".format(BOT_ID,chatID))
       if li:
         words = ""
         i = 1
@@ -433,9 +432,7 @@ if date[0] == "showAUreplylist":
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
         Bot("editMessageText",{"chat_id":chatID,"text":"📂꒐ قائمة الصوتيات فارغة","message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
-
-
-
+     
     if date[0] == "showSTreplylist":
       li = redis.hkeys("{}Nbot:{}:STreplys".format(BOT_ID,chatID))
       if li:
