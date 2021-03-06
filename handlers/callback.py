@@ -261,7 +261,7 @@ def updateCallback(client, callback_query,redis):
       edits = (redis.hget("{}Nbot:{}:edits".format(BOT_ID,chatID),userID) or 0)
       rate = int(msgs)*100/20000
       age = getAge(userID,r)
-      reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name(userFN),url="t.me/IM_KI")],[InlineKeyboardButton(r.Rrank.format(t),url="t.me/IM_KI")],[InlineKeyboardButton(r.Rmsgs.format(msgs),url="t.me/IM_KI")],[InlineKeyboardButton(r.Rrate.format(str(rate)+"%"),url="t.me/IM_KI")],[InlineKeyboardButton(r.Redits.format(edits),url="t.me/IM_KI")],[InlineKeyboardButton(r.Rage.format(age),url="t.me/IM_KI")]])
+      reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name(userFN),url="t.me/zx_xx")],[InlineKeyboardButton(r.Rrank.format(t),url="t.me/zx_xx")],[InlineKeyboardButton(r.Rmsgs.format(msgs),url="t.me/zx_xx")],[InlineKeyboardButton(r.Rrate.format(str(rate)+"%"),url="t.me/zx_xx")],[InlineKeyboardButton(r.Redits.format(edits),url="t.me/zx_xx")],[InlineKeyboardButton(r.Rage.format(age),url="t.me/zx_xx")]])
       Bot("editMessageReplyMarkup",{"chat_id":chatID,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
     if re.search("ShowO",date[0]):
       T = date[0].replace("ShowO","")
@@ -414,8 +414,9 @@ def updateCallback(client, callback_query,redis):
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
         Bot("editMessageText",{"chat_id":chatID,"text":r.replylistEm,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
- if date[0] == "showAUreplylist":
-	  li = redis.hkeys("{}Nbot:{}:AUreplys".format(BOT_ID,chatID))
+
+    if date[0] == "showAUreplylist":
+      li = redis.hkeys("{}Nbot:{}:AUreplys".format(BOT_ID,chatID))
       if li:
         words = ""
         i = 1
@@ -432,7 +433,8 @@ def updateCallback(client, callback_query,redis):
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
         Bot("editMessageText",{"chat_id":chatID,"text":"📂꒐ قائمة الصوتيات فارغة","message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
-     
+
+
     if date[0] == "showSTreplylist":
       li = redis.hkeys("{}Nbot:{}:STreplys".format(BOT_ID,chatID))
       if li:
@@ -721,4 +723,3 @@ def updateCallback(client, callback_query,redis):
           importlib.reload(U)
         except Exception as e:
           pass
-
