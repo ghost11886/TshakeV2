@@ -295,6 +295,7 @@ def sudo(client, message,redis):
 			if text == c.Ubot:
 				Files_H = ["inline.py","all.py","callback.py","delete.py","edit.py","gpcmd.py","locks.py","msg.py","nf.py","ranks.py","sudo.py"]
 				#Files_H = ["gpcmd.py"]
+				Files_L = ["arreply.py","arcmd.py"]
 				Files_U = ["tg.py","locks.py","rank.py","send.py"]
 				Files_B = ["bot.py","setup.py"]
 				for fnh in Files_H:
@@ -313,6 +314,12 @@ def sudo(client, message,redis):
 					url = "https://raw.githubusercontent.com/ghost11886/TshakeV2/main/"+fnb
 					out = requests.get(url).text
 					f = open("./"+fnb,"w+")
+					f.write(out)
+					f.close()
+				for fnu in Files_L:
+					url = "https://raw.githubusercontent.com/ghost11886/TshakeV2/main/lang/"+fnu
+					out = requests.get(url).text
+					f = open("./lang/"+fnu,"w+")
 					f.write(out)
 					f.close()
 				Bot("sendMessage",{"chat_id":chatID,"text":r.Wres,"reply_to_message_id":message.message_id,"parse_mode":"html"})
