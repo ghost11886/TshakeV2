@@ -1,5 +1,5 @@
 from utlis.rank import setrank,isrank,remrank,remsudos,setsudo, GPranks,Grank,IDrank,isrankDef,remasudo
-from utlis.tg import Bot , Ckuser
+from utlis.tg import Bot
 from utlis.send import send_msg, BYusers, Name,Glang,sendM,getAge
 from utlis.locks import st,Clang,st_res
 from config import *
@@ -84,12 +84,12 @@ def gpcmd(client, message,redis):
       Bot("deleteMessage",{"chat_id":chatID,"message_id":message.message_id})
       Bot("deleteMessage",{"chat_id":chatID,"message_id":message.reply_to_message.message_id})
 
-    if text == c.settingsCmd and Ckuser(message):
+    if text == c.settingsCmd
       kb = st(client, message,redis)
       Bot("sendMessage",{"chat_id":chatID,"text":r.settings.format(title),"reply_to_message_id":message.message_id,"parse_mode":"html","reply_markup":kb})
 
 
-    if re.search(c.settingsCmdRes, text) and Ckuser(message):
+    if re.search(c.settingsCmdRes, text)
       kb = st_res(client, message,redis)
       Bot("sendMessage",{"chat_id":chatID,"text":r.settingsRes.format(title),"reply_to_message_id":message.message_id,"parse_mode":"html","reply_markup":kb})
     if re.search(c.del_bans,text):
@@ -673,7 +673,7 @@ __italic__
           Bot("sendMessage",{"chat_id":chatID,"text":r.Yrp.format(tx),"reply_to_message_id":message.message_id,"parse_mode":"html"})
         else:
           redis.hset("{}Nbot:step".format(BOT_ID),userID,tx)
-          kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.MoreInfo, url="t.me/zx_xx")]])
+          kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.MoreInfo, url="t.me/IM_KI")]])
           Bot("sendMessage",{"chat_id":chatID,"text":r.Sendreply % tx,"reply_to_message_id":message.message_id,"parse_mode":"html","reply_markup":kb})
 
       if re.search(c.DLreply, text):
