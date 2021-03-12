@@ -554,10 +554,11 @@ __italic__
           # print("ssssssssss")
           # tx = text.replace(c.RsetIDC,"")
           tx = re.findall(c.setIDC,text)[0][1]
-		   rep = {"#age":"{age}","#name":"{name}","#id":"{id}","#username":"{username}","#msgs":"{msgs}","#stast":"{stast}","#edits":"{edits}","#rate":"{rate}","{us}":"{username}","#us":"{username}"}
+          rep = {"#age":"{age}","#name":"{name}","#id":"{id}","#username":"{username}","#msgs":"{msgs}","#stast":"{stast}","#edits":"{edits}","#rate":"{rate}","{us}":"{username}","#us":"{username}"}
           for v in rep.keys():
             tx = tx.replace(v,rep[v])
-			
+
+		 
           t = IDrank(redis,userID,chatID,r)
           msgs = (redis.hget("{}Nbot:{}:msgs".format(BOT_ID,chatID),userID) or 0)
           edits = (redis.hget("{}Nbot:{}:edits".format(BOT_ID,chatID),userID) or 0)
