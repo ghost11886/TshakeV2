@@ -64,7 +64,12 @@ def updateCallback(client, callback_query,redis):
   c = importlib.import_module("lang.arcmd")
   r = importlib.import_module("lang.arreply")
   
-
+  User_click = int((redis.get("{}Nbot:{}:floodClick".format(BOT_ID,userID)) or 1))
+  if User_click > 10:
+    BY = "<a href=\"tg://user?id={}\">{}</a>".format(userID,userFN)
+    Bot("sendMessage",{"chat_id":chatID,"text":r.banclick.format(BY),"disable_web_page_preview":True,"parse_mode":"html"})
+    redis.setex("{}Nbot:floodUsers:{}".format(BOT_ID,userID),60*2,"Ban")
+    redis.delete("{}Nbot:{}:floodClick".format(BOT_ID,userID))
   if date[0] == "Cordertow":
     rank = isrank(redis,userID,chatID)
     if (rank is "sudo" or rank is "asudo" or rank is "sudos" or rank is "malk" or rank is "acreator" or rank is "creator" or rank is "owner"):
@@ -84,7 +89,7 @@ def updateCallback(client, callback_query,redis):
       redis.delete("{}Nbot:{}:{}".format(BOT_ID,chat,Hash))
       Bot("editMessageText",{"chat_id":chatID,"text":r.DoneDelList,"message_id":message_id,"disable_web_page_preview":True})
   if re.search("del(.*)replys$",date[0]):
-    if int(date[3]) != userID:
+    if int(date[2]) != userID:
       Bot("answerCallbackQuery",{"callback_query_id":callback_query.id,"text":r.notforyou,"show_alert":True})
       redis.setex("{}Nbot:{}:floodClick".format(BOT_ID,userID), 3, User_click+1)
       return 0
@@ -128,12 +133,6 @@ def updateCallback(client, callback_query,redis):
         redis.srem("{}Nbot:{}:{}".format(BOT_ID,chat,Hash),ID)
         Bot("deleteMessage",{"chat_id":chatID,"message_id":message_id})
 
-  User_click = int((redis.get("{}Nbot:{}:floodClick".format(BOT_ID,userID)) or 1))
-  if User_click > 10:
-    BY = "<a href=\"tg://user?id={}\">{}</a>".format(userID,userFN)
-    Bot("sendMessage",{"chat_id":chatID,"text":r.banclick.format(BY),"disable_web_page_preview":True,"parse_mode":"html"})
-    redis.setex("{}Nbot:floodUsers:{}".format(BOT_ID,userID),60*2,"Ban")
-    redis.delete("{}Nbot:{}:floodClick".format(BOT_ID,userID))
   if chatID == userID:
     group = True
   if group is True and int(date[2]) == userID and not redis.get("{}Nbot:floodUsers:{}".format(BOT_ID,userID)):
