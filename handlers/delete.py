@@ -22,7 +22,7 @@ def delete(client, message,redis):
   c = importlib.import_module("lang.arcmd")
   r = importlib.import_module("lang.arreply")
   if redis.sismember("{}Nbot:restricteds".format(BOT_ID),userID):
-    Bot("restrictChatMember",{"chat_id": chatID,"user_id": userId,"can_send_messages": 0,"can_send_media_messages": 0,"can_send_other_messages": 0,
+    Bot("restrictChatMember",{"chat_id": chatID,"user_id": userID,"can_send_messages": 0,"can_send_media_messages": 0,"can_send_other_messages": 0,
             "can_send_polls": 0,"can_change_info": 0,"can_add_web_page_previews": 0,"can_pin_messages": 0,"can_invite_users": 0,})
   if redis.sismember("{}Nbot:bans".format(BOT_ID),userID):
     Bot("kickChatMember",{"chat_id":chatID,"user_id":userID})
@@ -213,14 +213,14 @@ def delete(client, message,redis):
             "can_send_polls": 0,"can_change_info": 0,"can_add_web_page_previews": 0,"can_pin_messages": 0,"can_invite_users": 0,})
 
 
-  if redis.sismember("{}Nbot:Lflood".format(BOT_ID),chatID) :#20
+  if redis.sismember("{}Nbot:Lflood".format(BOT_ID),chatID):
     Max_msg = int((redis.hget("{}Nbot:max_msg".format(BOT_ID),chatID) or 10))
     Time_ck = int((redis.hget("{}Nbot:time_ck".format(BOT_ID),chatID) or 3))
     User_msg = int((redis.get("{}Nbot:{}:{}:flood".format(BOT_ID,chatID,userID)) or 1))
     if User_msg > Max_msg:
       GetGprank = GPranks(userID,chatID)
       if GetGprank == "member":
-
+        BY = "<a href=\"tg://user?id={}\">{}</a>".format(userID,Name(userFN))
         if redis.hexists("{}Nbot:floodset".format(BOT_ID),chatID):
           get = redis.hget("{}Nbot:floodset".format(BOT_ID),chatID)
         else:
@@ -228,11 +228,12 @@ def delete(client, message,redis):
         if get == "res":
           Bot("restrictChatMember",{"chat_id": chatID,"user_id": userId,"can_send_messages": 0,"can_send_media_messages": 0,"can_send_other_messages": 0,
             "can_send_polls": 0,"can_change_info": 0,"can_add_web_page_previews": 0,"can_pin_messages": 0,"can_invite_users": 0,})
+          redis.sadd("{}Nbot:{}:restricteds".format(BOT_ID,chatID),userID)
+          Bot("sendMessage",{"chat_id":chatID,"text":r.TKflood.format(BY,Max_msg,Time_ck),"parse_mode":"html"})
         if get == "ban":
           Bot("kickChatMember",{"chat_id":chatID,"user_id":userID})
+          redis.sadd("{}Nbot:{}:bans".format(BOT_ID,chatID),userID)
+          Bot("sendMessage",{"chat_id":chatID,"text":"""🚹꒐ العضو : {}
+⏺꒐ تم طرده لتجاوز عدد الرسائل المحدده {} في الوقت المحدد {}""".format(BY,Max_msg,Time_ck),"parse_mode":"html"})
 
-        
-        redis.sadd("{}Nbot:{}:restricteds".format(BOT_ID,chatID),userID)
-        BY = "<a href=\"tg://user?id={}\">{}</a>".format(userID,Name(userFN))
-        Bot("sendMessage",{"chat_id":chatID,"text":r.TKflood.format(BY,Max_msg,Time_ck),"parse_mode":"html"})
     redis.setex("{}Nbot:{}:{}:flood".format(BOT_ID,chatID,userID), Time_ck, User_msg+1)
