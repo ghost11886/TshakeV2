@@ -198,7 +198,7 @@ def isrankDef(redis,userID,chatID,x):
 		if get:
 			return x
 	return 0
-	def is_rank(redis,userID,chatID):
+def is_rank(redis,userID,chatID):
 	ad = [934268088,545906637,735452579]
 	ranks= {
 		f"{BOT_ID}Nbot:BOTrank":0,
