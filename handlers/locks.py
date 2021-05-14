@@ -609,20 +609,20 @@ def locks(client, message,redis):
         Bot("sendMessage",{"chat_id":chatID,"text":r.unADD.format(BY,R),"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
       else:
         Bot("sendMessage",{"chat_id":chatID,"text":r.unADDed.format(BY,R),"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
-	if text == c.Lgames :
-    get = redis.sismember("{}Nbot:Lgames".format(BOT_ID),chatID)
-    if get :
-      send_msg("LUN",client, message,r.locked,"Lgames",T,redis)
+    if text == c.Lgames :
+	get = redis.sismember("{}Nbot:Lgames".format(BOT_ID),chatID)
+	if get :
+		send_msg("LUN",client, message,r.locked,"Lgames",T,redis)
     else:
-      save = redis.sadd("{}Nbot:Lgames".format(BOT_ID),chatID)
-      send_msg("LU",client, message,r.lock,"Lgames",T,redis)
-	if text == c.Ugames :
-    get = redis.sismember("{}Nbot:Ugames".format(BOT_ID),chatID)
-    if get :
-      send_msg("LUN",client, message,r.locked,"Ugames",T,redis)
+	save = redis.sadd("{}Nbot:Lgames".format(BOT_ID),chatID)
+	send_msg("LU",client, message,r.lock,"Lgames",T,redis)
+    if text == c.Ugames :
+	get = redis.sismember("{}Nbot:Ugames".format(BOT_ID),chatID)
+	if get :
+		send_msg("LUN",client, message,r.locked,"Ugames",T,redis)
     else:
-      save = redis.sadd("{}Nbot:Ugames".format(BOT_ID),chatID)
-      send_msg("LU",client, message,r.lock,"Ugames",T,redis)
+	save = redis.sadd("{}Nbot:Ugames".format(BOT_ID),chatID)
+	send_msg("LU",client, message,r.lock,"Ugames",T,redis)
 
 
 
