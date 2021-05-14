@@ -158,7 +158,7 @@ def allGP(client, message,redis):
       name = str.replace(name,"ساحه","ح ا ه س")
       name = str.replace(name,"جسر","ر ج س")
       Bot("sendMessage",{"chat_id":chatID,"text":name,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
-      if text == name:
+      if text and re.search(name,text) == name:
         tx = "🕹꒐ اليك الالعاب المقدمه من (<a href=\"http://t.me/zx_xx\">TshakeTeam</a>)"
         Bot("sendMessage",{"chat_id":chatID,"text":tx,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
     if text == "رتبتي":
