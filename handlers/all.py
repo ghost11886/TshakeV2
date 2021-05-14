@@ -116,7 +116,6 @@ def allGP(client, message,redis):
     if text and re.search("الاسرع",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       KlamSpeed = ["سحور","سياره","استقبال","قنفه","ايفون","بزونه","مطبخ","كرستيانو","دجاجه","مدرسه","الوان","غرفه","ثلاجه","كهوه","سفينه","العراق","محطه","طياره","رادار","منزل","مستشفى","كهرباء","تفاحه","اخطبوط","سلمون","فرنسا","برتقاله","تفاح","مطرقه","بتيته","لهانه","شباك","باص","سمكه","ذباب","تلفاز","حاسوب","انترنيت","ساحه","جسر"]
       name = random.choice(KlamSpeed)
-      redis.set("{}Nbot:KlamSpeed".format(BOT_ID),chatID)
       name = str.replace(name,"سحور","س ر و ح")
       name = str.replace(name,"سياره","ه ر س ي ا")
       name = str.replace(name,"استقبال","ل ب ا ت ق س ا")
@@ -158,8 +157,9 @@ def allGP(client, message,redis):
       name = str.replace(name,"ساحه","ح ا ه س")
       name = str.replace(name,"جسر","ر ج س")
       Bot("sendMessage",{"chat_id":chatID,"text":name,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
-      redis.hexists("{}Nbot:{}:KlamSpeed".format(BOT_ID,chatID),text)
-      if text == name:
+      redis.hexists("{}Nbot:KlamSpeed".format(BOT_ID),text)
+      txe = redis.hget("{}Nbot:KlamSpeed".format(BOT_ID),text)
+      if txe == name:
         tx = "🕹꒐ اليك الالعاب المقدمه من (<a href=\"http://t.me/zx_xx\">TshakeTeam</a>)"
         Bot("sendMessage",{"chat_id":chatID,"text":tx,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
     if text == "رتبتي":
