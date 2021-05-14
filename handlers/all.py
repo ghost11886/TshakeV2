@@ -113,7 +113,7 @@ def allGP(client, message,redis):
       #   Bot("sendMessage",{"chat_id":chatID,"text":r.RID.format(userID),"reply_to_message_id":message.message_id,"parse_mode":"html","reply_markup":reply_markup})
 
       if text == "الاسرع":
-        if redis.sismember("{}Nbot:Ugames".format(BOT_ID),chatID):
+        if not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
           KlamSpeed = ["سحور","سياره","استقبال","قنفه","ايفون","بزونه","مطبخ","كرستيانو","دجاجه","مدرسه","الوان","غرفه","ثلاجه","كهوه","سفينه","العراق","محطه","طياره","رادار","منزل","مستشفى","كهرباء","تفاحه","اخطبوط","سلمون","فرنسا","برتقاله","تفاح","مطرقه","بتيته","لهانه","شباك","باص","سمكه","ذباب","تلفاز","حاسوب","انترنيت","ساحه","جسر"]
           name = random.choice(KlamSpeed)
           redis.set("{}Nbot:KlamSpeed".format(BOT_ID),chatID)
