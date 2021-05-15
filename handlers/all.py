@@ -157,9 +157,8 @@ def allGP(client, message,redis):
       name = str.replace(name,"ساحه","ح ا ه س")
       name = str.replace(name,"جسر","ر ج س")
       Bot("sendMessage",{"chat_id":chatID,"text":name,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
-      redis.smembers("{}Nbot:KlamSpeed".format(BOT_ID),text)
-      txe = redis.hget("{}Nbot:KlamSpeed".format(BOT_ID),text)
-      if txe == name:
+	    redis.set("{}Nbot:KlamSpeeds".format(BOT_ID),name)
+	  if text == redis.get("{}Nbot:KlamSpeeds".format(BOT_ID,chatID)):
         tx = "🕹꒐ اليك الالعاب المقدمه من (<a href=\"http://t.me/zx_xx\">TshakeTeam</a>)"
         Bot("sendMessage",{"chat_id":chatID,"text":tx,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
     if text == "رتبتي":
