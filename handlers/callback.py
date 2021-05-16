@@ -412,7 +412,7 @@ def updateCallback(client, callback_query,redis):
           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.clickTOpv,url="https://telegram.me/{}?start=showreplylist={}={}={}".format(Botuser,chatID,userID,"TXreplys")),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":r.Toolong,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
         else:
-          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.replylistRm,callback_data=json.dumps(["delTXreplys","kb",userID])),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
+          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":words,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
@@ -451,7 +451,7 @@ def updateCallback(client, callback_query,redis):
           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.clickTOpv,url="https://telegram.me/{}?start=showreplylist={}={}={}".format(Botuser,chatID,userID,"STreplys")),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":r.Toolong,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
         else:
-          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.STreplylistRm,callback_data=json.dumps(["delSTreplys","kb",userID])),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
+          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":words,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
@@ -471,7 +471,7 @@ def updateCallback(client, callback_query,redis):
           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.clickTOpv,url="https://telegram.me/{}?start=showreplylist={}={}={}".format(Botuser,chatID,userID,"GFreplys")),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":r.Toolong,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
         else:
-          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.GFreplylistRm,callback_data=json.dumps(["delGFreplys","kb",userID])),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
+          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":words,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
@@ -490,7 +490,7 @@ def updateCallback(client, callback_query,redis):
           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.clickTOpv,url="https://telegram.me/{}?start=showreplylist={}={}={}".format(Botuser,chatID,userID,"VOreplys")),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":r.Toolong,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
         else:
-          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.VOreplylistRm,callback_data=json.dumps(["delVOreplys","kb",userID])),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
+          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":words,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylist","",userID])),]])
@@ -509,7 +509,7 @@ def updateCallback(client, callback_query,redis):
           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.clickTOpv,url="https://telegram.me/{}?start=showreplylistBOT={}={}={}".format(Botuser,chatID,userID,"TXreplys")),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":r.Toolong,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
         else:
-          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.replylistRm,callback_data=json.dumps(["delTXreplysBOT","kb",userID])),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
+          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":words,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
@@ -529,7 +529,7 @@ def updateCallback(client, callback_query,redis):
           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.clickTOpv,url="https://telegram.me/{}?start=showreplylistBOT={}={}={}".format(Botuser,chatID,userID,"STreplys")),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":r.Toolong,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
         else:
-          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.STreplylistRm,callback_data=json.dumps(["delSTreplysBOT","kb",userID])),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
+          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":words,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
@@ -549,7 +549,7 @@ def updateCallback(client, callback_query,redis):
           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.clickTOpv,url="https://telegram.me/{}?start=showreplylistBOT={}={}={}".format(Botuser,chatID,userID,"GFreplys")),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":r.Toolong,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
         else:
-          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.GFreplylistRm,callback_data=json.dumps(["delGFreplysBOT","kb",userID])),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
+          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":words,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
@@ -568,7 +568,7 @@ def updateCallback(client, callback_query,redis):
           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.clickTOpv,url="https://telegram.me/{}?start=showreplylistBOT={}={}={}".format(Botuser,chatID,userID,"VOreplys")),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":r.Toolong,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
         else:
-          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(r.VOreplylistRm,callback_data=json.dumps(["delVOreplysBOT","kb",userID])),],[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
+          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
           Bot("editMessageText",{"chat_id":chatID,"text":words,"message_id":message_id,"disable_web_page_preview":True,"reply_markup":reply_markup})
       else:
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<",callback_data=json.dumps(["replylistBOT","",userID])),]])
