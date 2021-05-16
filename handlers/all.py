@@ -332,7 +332,11 @@ def allGP(client, message,redis):
        textmsg = "🎁┇مبروك. لقد حصلت على 10 نقاط زيادة كمكافأة لك للعب مرة اخرى ارسل {امثله}"
        redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),userID,10)
        Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True}) 
-
+    if text and re.search("بوبي",text):
+      namebot = ["عمري فداك  بوبي" , " ها حبيبي 🌚♥️ " ,"كول حبيبي ؟ " , " ها حبي وياك مكتب ئلسيد "," الو الو رد مخنوك ","ها يحلو كول"," عمري الحلو " , " صاعد اتصال ويا الحب دقيقة وجيك 😘💘 "," مشغول حالياً 🌚🌸 " , " لابسك لتلح " ," هايروحي؟ "]
+      randomresponse = random.choice(namebot)
+      Bot("sendMessage",{"chat_id":chatID,"text":randomresponse,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
+      
     if text == "رتبتي":
       t = IDrank(redis,userID,chatID,r)
       Bot("sendMessage",{"chat_id":chatID,"text":f"⏏️꒐ موقعك : {t}","reply_to_message_id":message.message_id,"parse_mode":"html"})
