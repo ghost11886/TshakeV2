@@ -340,6 +340,16 @@ def allGP(client, message,redis):
       namebot = ["عمري فداك  بوبي" , " ها حبيبي 🌚♥️ " ,"كول حبيبي ؟ " , " ها حبي وياك مكتب ئلسيد "," الو الو رد مخنوك ","ها يحلو كول"," عمري الحلو " , " صاعد اتصال ويا الحب دقيقة وجيك 😘💘 "," مشغول حالياً 🌚🌸 " , " لابسك لتلح " ," هايروحي؟ "]
       randomresponse = random.choice(namebot)
       Bot("sendMessage",{"chat_id":chatID,"text":randomresponse,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
+
+    if text and  re.search("بيع نقاطي",text):
+      msgsCount = int((redis.hget("{}Nbot:{}:points".format(BOT_ID,chatID),userID) or 0)) * 2
+      if msgsCount == 0:
+        Bot("sendMessage",{"chat_id":chatID,"text":f"📮┇عذرا لا يوجد لديك عدد كاف من النقاط ","reply_to_message_id":message.message_id,"parse_mode":"html"})
+      else:
+         redis.hincrby("{}Nbot:{}:msgs".format(BOT_ID,chatID),userID,msgsCount)
+         Bot("sendMessage",{"chat_id":chatID,"text":f"✅꒐تم بيع جميع نقاطك مقابل {msgsCount} رسالة ","reply_to_message_id":message.message_id,"parse_mode":"html"})
+         redis.delete("{}Nbot:{}:points".format(BOT_ID,chatID),userID) 
+
     if text == "رتبتي":
       t = IDrank(redis,userID,chatID,r)
       Bot("sendMessage",{"chat_id":chatID,"text":f"⏏️꒐ موقعك : {t}","reply_to_message_id":message.message_id,"parse_mode":"html"})
