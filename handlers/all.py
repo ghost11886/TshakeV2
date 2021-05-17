@@ -166,7 +166,7 @@ def allGP(client, message,redis):
        textmsg = "🎁┇مبروك. لقد حصلت على 5 نقاط زيادة كمكافأة لك للعب مرة اخرى ارسل {الاسرع}"
        redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),userID,5)
        Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})  
-
+       redis.delete("{}Nbot:Klmspeed".format(BOT_ID))
     if text and re.search("سمايلات",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       Random = ["🍏","🍎","🍐","🍊","🍋","🍉","🍇","🍓","🍈","🍒","🍑","🍍","🥥","🥝","🍅","🍆","🥑","🥦","🥒","🌶","🌽","🥕","🥔","🥖","🥐","🍞","🥨","🍟","🧀","🥚","🍳","🥓","🥩","🍗","🍖","🌭","🍔","🍠","🍕","🥪","🥙","☕️","🍵","🥤","🍶","🍺","🍻","🏀","⚽️","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏸","🥅","🎰","🎮","🎳","🎯","🎲","🎻","🎸","🎺","🥁","🎹","🎼","🎧","🎤","🎬","🎨","🎭","🎪","🎟","🎫","🎗","🏵","🎖","🏆","🥌","🛷","🚗","🚌","🏎","🚓","🚑","🚚","🚛","🚜","🇮🇶","⚔","🛡","🔮","🌡","💣","📌","📍","📓","📗","📂","📅","📪","📫","📬","📭","⏰","📺","🎚","☎️","📡"]
       SM = random.choice(Random)
@@ -177,7 +177,8 @@ def allGP(client, message,redis):
        textmsg = "🎁┇مبروك. لقد حصلت على 7 نقاط زيادة كمكافأة لك للعب مرة اخرى ارسل {سمايلات}"
        redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),userID,7)
        Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True}) 
-    
+       redis.delete("{}Nbot:smiles".format(BOT_ID))
+
     if text and re.search("حزوره",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       Hzora = ["الجرس","عقرب الساعه","السمك","المطر","5","الكتاب","البسمار","7","الكعبه","بيت الشعر","لهانه","انا","امي","الابره","الساعه","22","غلط","كم الساعه","البيتنجان","البيض","المرايه","الضوء","الهواء","الضل","العمر","القلم","المشط","الحفره","البحر","الثلج","الاسفنج","الصوت","بلم"]
       name = random.choice(Hzora)
@@ -221,7 +222,7 @@ def allGP(client, message,redis):
        textmsg = "🎁┇مبروك. لقد حصلت على 8 نقاط زيادة كمكافأة لك للعب مرة اخرى ارسل {حزوره}"
        redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),userID,8)
        Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True}) 
-
+       redis.delete("{}Nbot:Hzor".format(BOT_ID))
 
 
 
@@ -260,7 +261,7 @@ def allGP(client, message,redis):
        textmsg = "🎁┇مبروك. لقد حصلت على 6 نقاط زيادة كمكافأة لك للعب مرة اخرى ارسل {معاني}"
        redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),userID,6)
        Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True}) 
-
+       redis.delete("{}Nbot:MaanyRand".format(BOT_ID))
     if text and re.search("العكس",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       katu = ["باي","فهمت","موزين","اسمعك","احبك","موحلو","نضيف","حاره","ناصي","جوه","سريع","ونسه","طويل","سمين","ضعيف","شريف","شجاع","رحت","عدل","نشيط","شبعان","موعطشان","خوش ولد","اني","هادئ"]
       name = random.choice(katu)
@@ -301,6 +302,8 @@ def allGP(client, message,redis):
        textmsg = "🎁┇مبروك. لقد حصلت على 10 نقاط زيادة كمكافأة لك للعب مرة اخرى ارسل {العكس}"
        redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),userID,10)
        Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True}) 
+       redis.delete("{}Nbot:opissite".format(BOT_ID))
+       
 
     if text and re.search("امثله",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       mthal = ["جوز","ضراطه","الحبل","الحافي","شقره","بيدك","سلايه","النخله","الخيل","حداد","المبلل","يركص","قرد","العنب","العمه","الخبز","بالحصاد","شهر","شكه","يكحله"]
@@ -331,12 +334,12 @@ def allGP(client, message,redis):
     if re.search(str(redis.get("{}Nbot:amthila".format(BOT_ID))), text):
        textmsg = "🎁┇مبروك. لقد حصلت على 10 نقاط زيادة كمكافأة لك للعب مرة اخرى ارسل {امثله}"
        redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),userID,10)
-       Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True}) 
+       Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
+       redis.delete("{}Nbot:amthila".format(BOT_ID)) 
     if text and re.search("بوبي",text):
       namebot = ["عمري فداك  بوبي" , " ها حبيبي 🌚♥️ " ,"كول حبيبي ؟ " , " ها حبي وياك مكتب ئلسيد "," الو الو رد مخنوك ","ها يحلو كول"," عمري الحلو " , " صاعد اتصال ويا الحب دقيقة وجيك 😘💘 "," مشغول حالياً 🌚🌸 " , " لابسك لتلح " ," هايروحي؟ "]
       randomresponse = random.choice(namebot)
       Bot("sendMessage",{"chat_id":chatID,"text":randomresponse,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
-      
     if text == "رتبتي":
       t = IDrank(redis,userID,chatID,r)
       Bot("sendMessage",{"chat_id":chatID,"text":f"⏏️꒐ موقعك : {t}","reply_to_message_id":message.message_id,"parse_mode":"html"})
