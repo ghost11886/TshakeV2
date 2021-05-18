@@ -114,7 +114,7 @@ def allGP(client, message,redis):
     
     
       
-    if text and re.search("الاسرع",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
+    if text and re.search("^الاسرع$",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       KlamSpeed = ["سحور","سياره","استقبال","قنفه","ايفون","بزونه","مطبخ","كرستيانو","دجاجه","مدرسه","الوان","غرفه","ثلاجه","كهوه","سفينه","العراق","محطه","طياره","رادار","منزل","مستشفى","كهرباء","تفاحه","اخطبوط","سلمون","فرنسا","برتقاله","تفاح","مطرقه","بتيته","لهانه","شباك","باص","سمكه","ذباب","تلفاز","حاسوب","انترنيت","ساحه","جسر"]
       name = random.choice(KlamSpeed)
       temp = redis.set("{}Nbot:Klmspeed".format(BOT_ID),name)
@@ -167,7 +167,7 @@ def allGP(client, message,redis):
        redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),userID,5)
        Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})  
        redis.delete("{}Nbot:Klmspeed".format(BOT_ID))
-    if text and re.search("سمايلات",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
+    if text and re.search("^سمايلات$",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       Random = ["🍏","🍎","🍐","🍊","🍋","🍉","🍇","🍓","🍈","🍒","🍑","🍍","🥥","🥝","🍅","🍆","🥑","🥦","🥒","🌶","🌽","🥕","🥔","🥖","🥐","🍞","🥨","🍟","🧀","🥚","🍳","🥓","🥩","🍗","🍖","🌭","🍔","🍠","🍕","🥪","🥙","☕️","🍵","🥤","🍶","🍺","🍻","🏀","⚽️","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏸","🥅","🎰","🎮","🎳","🎯","🎲","🎻","🎸","🎺","🥁","🎹","🎼","🎧","🎤","🎬","🎨","🎭","🎪","🎟","🎫","🎗","🏵","🎖","🏆","🥌","🛷","🚗","🚌","🏎","🚓","🚑","🚚","🚛","🚜","🇮🇶","⚔","🛡","🔮","🌡","💣","📌","📍","📓","📗","📂","📅","📪","📫","📬","📭","⏰","📺","🎚","☎️","📡"]
       SM = random.choice(Random)
       tempSM = redis.set("{}Nbot:smiles".format(BOT_ID),SM)
@@ -179,7 +179,7 @@ def allGP(client, message,redis):
        Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True}) 
        redis.delete("{}Nbot:smiles".format(BOT_ID))
 
-    if text and re.search("حزوره",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
+    if text and re.search("^حزوره$",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       Hzora = ["الجرس","عقرب الساعه","السمك","المطر","5","الكتاب","البسمار","7","الكعبه","بيت الشعر","لهانه","انا","امي","الابره","الساعه","22","غلط","كم الساعه","البيتنجان","البيض","المرايه","الضوء","الهواء","الضل","العمر","القلم","المشط","الحفره","البحر","الثلج","الاسفنج","الصوت","بلم"]
       name = random.choice(Hzora)
       temp = redis.set("{}Nbot:Hzor".format(BOT_ID),name)
@@ -226,7 +226,7 @@ def allGP(client, message,redis):
 
 
 
-    if text and re.search("معاني",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
+    if text and re.search("^معاني$",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       Maany_Rand = ["قرد","دجاجه","بطريق","ضفدع","بومه","نحله","ديك","جمل","بقره","دولفين","تمساح","قرش","نمر","اخطبوط","سمكه","خفاش","اسد","فأر","ذئب","فراشه","عقرب","زرافه","قنفذ","تفاحه","باذنجان"]
       name = random.choice(Maany_Rand)
       temp = redis.set("{}Nbot:MaanyRand".format(BOT_ID),name)
@@ -262,7 +262,7 @@ def allGP(client, message,redis):
        redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),userID,6)
        Bot("sendMessage",{"chat_id":chatID,"text":textmsg,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True}) 
        redis.delete("{}Nbot:MaanyRand".format(BOT_ID))
-    if text and re.search("العكس",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
+    if text and re.search("^العكس$",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       katu = ["باي","فهمت","موزين","اسمعك","احبك","موحلو","نضيف","حاره","ناصي","جوه","سريع","ونسه","طويل","سمين","ضعيف","شريف","شجاع","رحت","عدل","نشيط","شبعان","موعطشان","خوش ولد","اني","هادئ"]
       name = random.choice(katu)
       temp = redis.set("{}Nbot:opissite".format(BOT_ID),name)
@@ -305,7 +305,7 @@ def allGP(client, message,redis):
        redis.delete("{}Nbot:opissite".format(BOT_ID))
        
 
-    if text and re.search("امثله",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
+    if text and re.search("^امثله$",text) and not redis.sismember("{}Nbot:gpgames".format(BOT_ID),chatID):
       mthal = ["جوز","ضراطه","الحبل","الحافي","شقره","بيدك","سلايه","النخله","الخيل","حداد","المبلل","يركص","قرد","العنب","العمه","الخبز","بالحصاد","شهر","شكه","يكحله"]
       name = random.choice(mthal)
       temp = redis.set("{}Nbot:amthila".format(BOT_ID),name)
@@ -341,7 +341,7 @@ def allGP(client, message,redis):
       randomresponse = random.choice(namebot)
       Bot("sendMessage",{"chat_id":chatID,"text":randomresponse,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
 
-    if text and  re.search("بيع نقاطي",text):
+    if text and  re.search("^بيع نقاطي$",text):
       msgsCount = int((redis.hget("{}Nbot:{}:points".format(BOT_ID,chatID),userID) or 0)) * 2
       if msgsCount == 0:
         Bot("sendMessage",{"chat_id":chatID,"text":f"📮┇عذرا لا يوجد لديك عدد كاف من النقاط ","reply_to_message_id":message.message_id,"parse_mode":"html"})
