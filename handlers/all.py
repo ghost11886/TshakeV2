@@ -349,7 +349,9 @@ def allGP(client, message,redis):
          redis.hincrby("{}Nbot:{}:msgs".format(BOT_ID,chatID),userID,msgsCount)
          Bot("sendMessage",{"chat_id":chatID,"text":f"✅꒐تم بيع جميع نقاطك مقابل {msgsCount} رسالة ","reply_to_message_id":message.message_id,"parse_mode":"html"})
          redis.delete("{}Nbot:{}:points".format(BOT_ID,chatID),userID) 
-
+    if text and  re.search("^مسح سحكاتي$",text):
+      get = redis.delete("{}Nbot:{}:edits".format(BOT_ID,chatID),userID)
+      Bot("sendMessage",{"chat_id":chatID,"text":f"⏏️꒐ تم حذف جميع تعديلاتك","reply_to_message_id":message.message_id,"parse_mode":"html"})
     if text == "رتبتي":
       t = IDrank(redis,userID,chatID,r)
       Bot("sendMessage",{"chat_id":chatID,"text":f"⏏️꒐ موقعك : {t}","reply_to_message_id":message.message_id,"parse_mode":"html"})
