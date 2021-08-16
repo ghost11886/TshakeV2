@@ -1,6 +1,6 @@
 from utlis.rank import setrank,isrank,remrank,remsudos,setsudo
 from utlis.send import send_msg, BYusers,Glang
-from utlis.tg import Bot
+from utlis.tg import Bot,Ckuser
 from config import *
 
 from pyrogram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
@@ -18,6 +18,27 @@ def ranks(client, message,redis):
 	r = importlib.import_module("lang.arreply")
 
 	if (rank is "sudo"  or rank is "asudo" or rank is "sudos" or rank is "malk"):
+		if re.search("^ترتيب الاوامر$", text):
+			ar = {
+				"ا":"ايدي",
+				"م":"رفع مميز",
+				"اد":"رفع ادمن",
+				"مد":"رفع مدير",
+				"من":"رفع منشى",
+				"اس":"رفع منشى اساسي",
+				"تعط":"تعطيل الايدي بالصورة",
+				"تفع":"تفعيل الايدي بالصورة",
+			}
+			i = 1
+			orders = ""
+			for tx, text in ar.items():
+				ad = f"{tx}={text}"
+				if not redis.sismember("{}Nbot:{}:TXoeders".format(BOT_ID,chatID),ad):
+					redis.sadd("{}Nbot:{}:TXoeders".format(BOT_ID,chatID),ad)
+				orders += f"{i} - {text} > {tx}\n"
+				i+=1
+			Bot("sendMessage",{"chat_id":chatID,"text":f"✅꒐ تم اضافه الاوامر الاتيه \n⎯ ⎯ ⎯ ⎯\n{orders}\n⎯ ⎯ ⎯ ⎯","reply_to_message_id":message.message_id,"disable_web_page_preview":True})
+
 		if re.search(c.del_ac, text):
 			H = "acreator"
 			redis.delete("{}Nbot:{}:{}".format(BOT_ID,chatID,H))
