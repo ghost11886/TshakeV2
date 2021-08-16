@@ -86,7 +86,7 @@ def updateHandlers(client, message,redis):
 					redis.sadd("{}Nbot:disabledgroups".format(BOT_ID),chatID)
 					NextDay_Date = datetime.datetime.today() + datetime.timedelta(days=1)
 					redis.hset("{}Nbot:disabledgroupsTIME".format(BOT_ID),chatID,str(NextDay_Date))
-					kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.MoreInfo, url="t.me/zx_xx")]])
+					kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.MoreInfo, url="t.me/IM_KI")]])
 					Bot("sendMessage",{"chat_id":chatID,"text":r.disabl.format(title),"reply_to_message_id":message.message_id,"parse_mode":"markdown","reply_markup":kb})
 		if  group is True:
 			t = threading.Thread(target=allGP,args=(client, message,redis))
@@ -94,16 +94,26 @@ def updateHandlers(client, message,redis):
 			t.start()
 
 		if text and group is True:
+			if redis.sismember("{}Nbot:publicOrders".format(BOT_ID),chatID):
+				x = redis.smembers("{}Nbot:{}:TXPoeders".format(BOT_ID,chatID))
+				for x in x:
+					try:
+						x = x.split("=")
+						if re.search(f"^\{x[0]}$", text) or re.search(f"^\{x[0]} (.*)$", text):
+							text = text.replace(x[0], x[1])
+					except Exception as e:
+						print(e)
+				message.text = text
 			x = redis.smembers("{}Nbot:{}:TXoeders".format(BOT_ID,chatID))
 			for x in x:
-				    try:
-					        x = x.split("=")
-						    if re.search(f"^\{x[0]}$", text) or re.search(f"^\{x[0]} (.*)$", text):
-							        text = text.replace(x[0], x[1])
-							
-					except Exception as e:
-						    print(e)	
+				try:
+					x = x.split("=")
+					if re.search(f"^\{x[0]}$", text) or re.search(f"^\{x[0]} (.*)$", text):
+						text = text.replace(x[0], x[1])
+				except Exception as e:
+					print(e)
 			message.text = text
+
 		if (rank is "sudo" or rank is "sudos" or rank is "asudo") and group is True:
 			t = threading.Thread(target=sudo,args=(client, message,redis))
 			t.daemon = True
@@ -114,9 +124,10 @@ def updateHandlers(client, message,redis):
 			t.daemon = True
 			t.start()
 		if text and (rank is "sudo" or rank is "asudo" or rank is "sudos"  or rank is "malk" or rank is "acreator" or rank is "creator" or rank is "owner" or rank is "admin") and group is True and re.search(c.startlock,text):
-			t = threading.Thread(target=locks,args=(client, message,redis))
-			t.daemon = True
-			t.start()
+			if Ckuser(message):
+				t = threading.Thread(target=locks,args=(client, message,redis))
+				t.daemon = True
+				t.start()
 		if (rank is False or rank is 0) and group is True:
 			t = threading.Thread(target=delete,args=(client, message,redis))
 			t.daemon = True
