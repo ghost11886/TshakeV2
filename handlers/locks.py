@@ -49,7 +49,7 @@ def locks(client, message,redis):
       send_msg("LU",client, message,r.unlock,"Lphoto",T,redis)
     else:
       send_msg("LUN",client, message,r.unlocked,"Lphoto",T,redis)
-  
+
   if text == c.Lusername :
     get = redis.sismember("{}Nbot:Lusername".format(BOT_ID),chatID)
     if get :
@@ -426,6 +426,7 @@ def locks(client, message,redis):
         Bot("sendMessage",{"chat_id":chatID,"text":r.unADD.format(BY,R),"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
 
   if rank != "admin":
+
     if text == "قفل الدخول" :
       get = redis.sismember("{}Nbot:Lgpjoin".format(BOT_ID),chatID)
       if get :
@@ -442,6 +443,7 @@ def locks(client, message,redis):
       else:
         send_msg("LUN",client, message,r.unlocked,"Lgpjoin",T,redis)
 
+      
     if text == c.Lbancheck :
       R = text.split(" ")[1]
       get = redis.sismember("{}Nbot:bancheck".format(BOT_ID),chatID)
@@ -628,7 +630,6 @@ def locks(client, message,redis):
 
 
 
-
     if re.search(c.LIDpt,text):
       R = text.replace(c.stAd,"")
       get = redis.sismember("{}Nbot:IDpt".format(BOT_ID),chatID)
@@ -638,6 +639,7 @@ def locks(client, message,redis):
         Bot("sendMessage",{"chat_id":chatID,"text":r.ADD.format(BY,R),"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
       else:
          Bot("sendMessage",{"chat_id":chatID,"text":r.ADDed.format(BY,R),"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True})
+
     if re.search(c.UIDpt,text): 
       R = text.replace(c.stUd,"")
       BY = "<a href=\"tg://user?id={}\">{}</a>".format(userID,userFN)
