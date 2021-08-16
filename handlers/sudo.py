@@ -360,25 +360,25 @@ def sudo(client, message,redis):
 				Files_U = ["tg.py","locks.py","rank.py","send.py"]
 				Files_B = ["bot.py","setup.py"]
 				for fnh in Files_H:
-					url = "https://raw.githubusercontent.com/TshAkEAb/TshakeV2/master/handlers/"+fnh
+					url = "https://raw.githubusercontent.com/ghost11886/TshakeV2/main/handlers/"+fnh
 					out = requests.get(url).text
 					f = open("./handlers/"+fnh,"w+")
 					f.write(out)
 					f.close()
 				for fnu in Files_U:
-					url = "https://raw.githubusercontent.com/TshAkEAb/TshakeV2/master/utlis/"+fnu
+					url = "https://raw.githubusercontent.com/ghost11886/TshakeV2/main/utlis/"+fnu
 					out = requests.get(url).text
 					f = open("./utlis/"+fnu,"w+")
 					f.write(out)
 					f.close()
 				for fnb in Files_B:
-					url = "https://raw.githubusercontent.com/TshAkEAb/TshakeV2/master/"+fnb
+					url = "https://raw.githubusercontent.com/ghost11886/TshakeV2/main/"+fnb
 					out = requests.get(url).text
 					f = open("./"+fnb,"w+")
 					f.write(out)
 					f.close()
 				for fnu in Files_L:
-					url = "https://raw.githubusercontent.com/TshAkEAb/TshakeV2/master/lang/"+fnu
+					url = "https://raw.githubusercontent.com/ghost11886/TshakeV2/main/lang/"+fnu
 					out = requests.get(url).text
 					f = open("./lang/"+fnu,"w+")
 					f.write(out)
