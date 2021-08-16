@@ -123,11 +123,7 @@ def updateHandlers(client, message,redis):
 			t = threading.Thread(target=ranks,args=(client, message,redis))
 			t.daemon = True
 			t.start()
-		if text and (rank is "sudo" or rank is "asudo" or rank is "sudos"  or rank is "malk" or rank is "acreator" or rank is "creator" or rank is "owner" or rank is "admin") and group is True and re.search(c.startlock,text):
-			if Ckuser(message):
-				t = threading.Thread(target=locks,args=(client, message,redis))
-				t.daemon = True
-				t.start()
+	
 		if (rank is False or rank is 0) and group is True:
 			t = threading.Thread(target=delete,args=(client, message,redis))
 			t.daemon = True
