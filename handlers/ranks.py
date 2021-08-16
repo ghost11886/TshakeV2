@@ -1,6 +1,6 @@
 from utlis.rank import setrank,isrank,remrank,remsudos,setsudo
 from utlis.send import send_msg, BYusers,Glang
-from utlis.tg import Bot,Ckuser
+from utlis.tg import Bot
 from config import *
 
 from pyrogram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
