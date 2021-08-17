@@ -84,12 +84,12 @@ def gpcmd(client, message,redis):
       Bot("deleteMessage",{"chat_id":chatID,"message_id":message.message_id})
       Bot("deleteMessage",{"chat_id":chatID,"message_id":message.reply_to_message.message_id})
 
-    if text == c.settingsCmd:
+    if text == c.settingsCmd and Ckuser(message):
       kb = st(client, message,redis)
       Bot("sendMessage",{"chat_id":chatID,"text":r.settings.format(title),"reply_to_message_id":message.message_id,"parse_mode":"html","reply_markup":kb})
 
 
-    if re.search(c.settingsCmdRes, text):
+    if re.search(c.settingsCmdRes, text) and Ckuser(message):
       kb = st_res(client, message,redis)
       Bot("sendMessage",{"chat_id":chatID,"text":r.settingsRes.format(title),"reply_to_message_id":message.message_id,"parse_mode":"html","reply_markup":kb})
     if re.search(c.del_bans,text):

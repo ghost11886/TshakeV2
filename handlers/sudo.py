@@ -122,7 +122,7 @@ def sudo(client, message,redis):
 			NextDay_Date = datetime.datetime.today() + datetime.timedelta(days=1)
 			redis.hset("{}Nbot:disabledgroupsTIME".format(BOT_ID),chatID,str(NextDay_Date))
 		text = text.replace("مسح ","")
-		if re.search(c.malk, text):
+		if re.search(c.malk, text) and Ckuser(message):
 			arrays = redis.get("{}Nbot:{}:malk".format(BOT_ID,chatID))
 			if arrays:
 				b = BYusers({arrays},chatID,redis,client)
@@ -133,7 +133,7 @@ def sudo(client, message,redis):
 			else:
 				Bot("sendMessage",{"chat_id":chatID,"text":r.listempty.format(text),"reply_to_message_id":message.message_id,"parse_mode":"markdown"})
 
-		if re.search(c.setmalk, text):
+		if re.search(c.setmalk, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.setmalk2,text):
@@ -153,7 +153,7 @@ def sudo(client, message,redis):
 			except Exception as e:
 				Bot("sendMessage",{"chat_id":chatID,"text":r.userNocc,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
-		if re.search(c.remmalk, text):
+		if re.search(c.remmalk, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.remmalk2,text):
@@ -396,7 +396,7 @@ def sudo(client, message,redis):
 				elif v["ok"] == False:
 					Bot("sendMessage",{"chat_id":chatID,"text":r.DsetSudosShowE,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
-			if re.search(c.sudosList, text):
+			if re.search(c.sudosList, text) and Ckuser(message):
 				text = text.replace("مسح ","")
 				arrays = redis.smembers("{}Nbot:sudos".format(BOT_ID,chatID))
 				b = BYusers(arrays,chatID,redis,client)
@@ -406,7 +406,7 @@ def sudo(client, message,redis):
 				else:
 					Bot("sendMessage",{"chat_id":chatID,"text":r.listempty.format(text),"reply_to_message_id":message.message_id,"parse_mode":"markdown"})
 
-			if re.search(c.setsudos, text):
+			if re.search(c.setsudos, text) and Ckuser(message):
 				if re.search("@",text):
 					user = text.split("@")[1]
 				if re.search(c.setsudos2,text):
@@ -427,7 +427,7 @@ def sudo(client, message,redis):
 					print(e)
 					Bot("sendMessage",{"chat_id":chatID,"text":r.userNocc,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
-			if re.search(c.remsudos, text):
+			if re.search(c.remsudos, text) and Ckuser(message):
 				if re.search("@",text):
 					user = text.split("@")[1]
 				if re.search(c.remsudos2,text):
@@ -450,7 +450,7 @@ def sudo(client, message,redis):
 
 
 
-			if re.search(c.asudoList, text):
+			if re.search(c.asudoList, text) and Ckuser(message):
 				text = text.replace("مسح ","")
 				arrays = redis.smembers("{}Nbot:asudo".format(BOT_ID,chatID))
 				b = BYusers(arrays,chatID,redis,client)
@@ -460,7 +460,7 @@ def sudo(client, message,redis):
 				else:
 					Bot("sendMessage",{"chat_id":chatID,"text":r.listempty.format(text),"reply_to_message_id":message.message_id,"parse_mode":"markdown"})
 
-			if re.search(c.setasudo, text):
+			if re.search(c.setasudo, text) and Ckuser(message):
 				if re.search("@",text):
 					user = text.split("@")[1]
 				if re.search(c.setasudo2,text):
@@ -481,7 +481,7 @@ def sudo(client, message,redis):
 					print(e)
 					Bot("sendMessage",{"chat_id":chatID,"text":r.userNocc,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
-			if re.search(c.remasudo, text):
+			if re.search(c.remasudo, text) and Ckuser(message):
 				if re.search("@",text):
 					user = text.split("@")[1]
 				if re.search(c.remasudo2,text):
@@ -610,12 +610,12 @@ def sudo(client, message,redis):
 					print(e)
 					Bot("sendMessage",{"chat_id":chatID,"text":r.userNocc,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
-			if re.search(c.Alllist, text):
+			if re.search(c.Alllist, text) and Ckuser(message):
 				reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(c.STbanall,callback_data=json.dumps(["showbanall","",userID])),InlineKeyboardButton(c.STtkall,callback_data=json.dumps(["showtkall","",userID])),]])
 				Bot("sendMessage",{"chat_id":chatID,"text":r.banlist,"reply_to_message_id":message.message_id,"parse_mode":"html","reply_markup":reply_markup})
 			
 			
-			if re.search(c.stats, text):
+			if re.search(c.stats, text) and Ckuser(message):
 				pr = redis.scard("{}Nbot:privates".format(BOT_ID))
 				gp = redis.scard("{}Nbot:groups".format(BOT_ID))
 				kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.CKgps,callback_data=json.dumps(["ckGPs","",userID]))]])
@@ -626,7 +626,7 @@ def sudo(client, message,redis):
 				reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(c.STgroup,callback_data=json.dumps(["fwdtogroups","",userID])),InlineKeyboardButton(c.STprivates,callback_data=json.dumps(["fwdtoprivates","",userID])),]])
 				Bot("sendMessage",{"chat_id":chatID,"text":r.sendto,"reply_to_message_id":message.reply_to_message.message_id,"parse_mode":"html","reply_markup":reply_markup})
 
-			if re.search(c.showGPS, text):
+			if re.search(c.showGPS, text) and Ckuser(message):
 				IDS = redis.smembers("{}Nbot:groups".format(BOT_ID))
 				GPslist = ""
 				i = 1
@@ -696,7 +696,7 @@ def sudo(client, message,redis):
 
 
 
-			if re.search(c.sendall, text) and message.reply_to_message:
+			if re.search(c.sendall, text) and message.reply_to_message and Ckuser(message):
 				if rank == "asudo" and redis.get("{}Nbot:bodas".format(BOT_ID)):
 					return 0
 				if message.reply_to_message.text:

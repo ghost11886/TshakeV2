@@ -39,12 +39,12 @@ def ranks(client, message,redis):
 				i+=1
 			Bot("sendMessage",{"chat_id":chatID,"text":f"✅꒐ تم اضافه الاوامر الاتيه \n⎯ ⎯ ⎯ ⎯\n{orders}\n⎯ ⎯ ⎯ ⎯","reply_to_message_id":message.message_id,"disable_web_page_preview":True})
 
-		if re.search(c.del_ac, text):
+		if re.search(c.del_ac, text) and Ckuser(message):
 			H = "acreator"
 			redis.delete("{}Nbot:{}:{}".format(BOT_ID,chatID,H))
 			Bot("sendMessage",{"chat_id":chatID,"text":r.DoneDelList,"reply_to_message_id":message.message_id,"disable_web_page_preview":True})
 
-		if re.search(c.acreators, text):
+		if re.search(c.acreators, text) and Ckuser(message):
 			arrays = redis.smembers("{}Nbot:{}:acreator".format(BOT_ID,chatID))
 			if arrays:
 				b = BYusers(arrays,chatID,redis,client)
@@ -56,7 +56,7 @@ def ranks(client, message,redis):
 			else:
 				Bot("sendMessage",{"chat_id":chatID,"text":r.listempty.format(text),"reply_to_message_id":message.message_id,"parse_mode":"markdown"})
 
-		if re.search(c.setacreator, text):
+		if re.search(c.setacreator, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.setacreator2,text):
@@ -76,7 +76,7 @@ def ranks(client, message,redis):
 			except Exception as e:
 				Bot("sendMessage",{"chat_id":chatID,"text":r.userNocc,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
-		if re.search(c.remacreator, text):
+		if re.search(c.remacreator, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.remacreator2,text):
@@ -98,12 +98,12 @@ def ranks(client, message,redis):
 
 
 	if (rank is "sudo" or rank is "asudo" or rank is "sudos" or rank is "malk" or rank is "acreator"):
-		if re.search(c.del_cr, text):
+		if re.search(c.del_cr, text) and Ckuser(message):
 			H = "creator"
 			redis.delete("{}Nbot:{}:{}".format(BOT_ID,chatID,H))
 			Bot("sendMessage",{"chat_id":chatID,"text":r.DoneDelList,"reply_to_message_id":message.message_id,"disable_web_page_preview":True})
 
-		if re.search(c.creators, text):
+		if re.search(c.creators, text) and Ckuser(message):
 			arrays = redis.smembers("{}Nbot:{}:creator".format(BOT_ID,chatID))
 			if arrays:
 				b = BYusers(arrays,chatID,redis,client)
@@ -115,7 +115,7 @@ def ranks(client, message,redis):
 			else:
 				Bot("sendMessage",{"chat_id":chatID,"text":r.listempty.format(text),"reply_to_message_id":message.message_id,"parse_mode":"markdown"})
 
-		if re.search(c.setcreator, text):
+		if re.search(c.setcreator, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.setcreator2,text):
@@ -135,7 +135,7 @@ def ranks(client, message,redis):
 			except Exception as e:
 				Bot("sendMessage",{"chat_id":chatID,"text":r.userNocc,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
-		if re.search(c.remcreator, text):
+		if re.search(c.remcreator, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.remcreator2,text):
@@ -157,17 +157,17 @@ def ranks(client, message,redis):
 
 	if (rank is "sudo"  or rank is "asudo" or rank is "sudos" or rank is "malk" or rank is "acreator" or rank is "creator" or rank is "owner"):
 
-		if re.search(c.del_ad, text):
+		if re.search(c.del_ad, text) and Ckuser(message):
 			H = "admin"
 			redis.delete("{}Nbot:{}:{}".format(BOT_ID,chatID,H))
 			Bot("sendMessage",{"chat_id":chatID,"text":r.DoneDelList,"reply_to_message_id":message.message_id,"disable_web_page_preview":True})
-		if re.search(c.del_vp, text):
+		if re.search(c.del_vp, text) and Ckuser(message):
 			H = "vip"
 			redis.delete("{}Nbot:{}:{}".format(BOT_ID,chatID,H))
 			Bot("sendMessage",{"chat_id":chatID,"text":r.DoneDelList,"reply_to_message_id":message.message_id,"disable_web_page_preview":True})
 
 
-		if re.search(c.admins, text):
+		if re.search(c.admins, text) and Ckuser(message):
 			arrays = redis.smembers("{}Nbot:{}:admin".format(BOT_ID,chatID))
 			b = BYusers(arrays,chatID,redis,client)
 			kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.delList.format(text), callback_data=json.dumps(["delList","admin",userID]))]])
@@ -176,7 +176,7 @@ def ranks(client, message,redis):
 			else:
 				Bot("sendMessage",{"chat_id":chatID,"text":r.listempty.format(text),"reply_to_message_id":message.message_id,"parse_mode":"markdown"})
 
-		if re.search(c.vips, text):
+		if re.search(c.vips, text) and Ckuser(message):
 			
 			arrays = redis.smembers("{}Nbot:{}:vip".format(BOT_ID,chatID))
 			b = BYusers(arrays,chatID,redis,client)
@@ -188,7 +188,7 @@ def ranks(client, message,redis):
 
 		orad = redis.hget("{}Nbot:adminor:cb".format(BOT_ID),chatID) or c.setadmin
 		orad2 = redis.hget("{}Nbot:adminor:cb2".format(BOT_ID),chatID) or c.setadmin2
-		if re.search(c.setadmin+"|"+orad, text):
+		if re.search(c.setadmin+"|"+orad, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.setadmin2+"|"+orad2,text):
@@ -209,7 +209,7 @@ def ranks(client, message,redis):
 			except Exception as e:
 				Bot("sendMessage",{"chat_id":chatID,"text":r.userNocc,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
-		if re.search(c.remadmin, text):
+		if re.search(c.remadmin, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.remadmin2,text):
@@ -231,7 +231,7 @@ def ranks(client, message,redis):
 		
 		orvip = redis.hget("{}Nbot:vipor:cb".format(BOT_ID),chatID) or c.setvip
 		orvip2 = redis.hget("{}Nbot:vipor:cb2".format(BOT_ID),chatID) or c.setvip2
-		if re.search(c.setvip+"|"+orvip, text):
+		if re.search(c.setvip+"|"+orvip, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.setvip2+"|"+orvip2,text):
@@ -255,7 +255,7 @@ def ranks(client, message,redis):
 				print(e)
 				Bot("sendMessage",{"chat_id":chatID,"text":r.userNocc,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
-		if re.search(c.remvip, text):
+		if re.search(c.remvip, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.remvip2,text):
@@ -276,12 +276,12 @@ def ranks(client, message,redis):
 				Bot("sendMessage",{"chat_id":chatID,"text":r.userNocc,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
 	if (rank is "sudo" or rank is "sudos" or rank is "asudo" or rank is "malk" or rank is "acreator" or rank is "creator"):
-		if re.search(c.del_ow, text):
+		if re.search(c.del_ow, text) and Ckuser(message):
 			H = "owner"
 			redis.delete("{}Nbot:{}:{}".format(BOT_ID,chatID,H))
 			Bot("sendMessage",{"chat_id":chatID,"text":r.DoneDelList,"reply_to_message_id":message.message_id,"disable_web_page_preview":True})
 
-		if re.search(c.owners, text):
+		if re.search(c.owners, text) and Ckuser(message):
 			arrays = redis.smembers("{}Nbot:{}:owner".format(BOT_ID,chatID))
 			b = BYusers(arrays,chatID,redis,client)
 			kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.delList.format(text), callback_data=json.dumps(["delList","owner",userID]))]])
@@ -292,7 +292,7 @@ def ranks(client, message,redis):
 
 		orow = redis.hget("{}Nbot:owneror:cb".format(BOT_ID),chatID) or c.setowner
 		orow2 = redis.hget("{}Nbot:owneror:cb2".format(BOT_ID),chatID) or c.setowner2
-		if re.search(c.setowner+"|"+orow, text):
+		if re.search(c.setowner+"|"+orow, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.setowner2+"|"+orow2,text):
@@ -313,7 +313,7 @@ def ranks(client, message,redis):
 			except Exception as e:
 				Bot("sendMessage",{"chat_id":chatID,"text":r.userNocc,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 
-		if re.search(c.remowner, text):
+		if re.search(c.remowner, text) and Ckuser(message):
 			if re.search("@",text):
 				user = text.split("@")[1]
 			if re.search(c.remowner2,text):

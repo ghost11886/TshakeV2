@@ -1,7 +1,7 @@
 from utlis.rank import setrank ,isrank ,remrank ,setsudos ,remsudos ,setsudo,IDrank,GPranks
 from utlis.send import send_msg, BYusers, sendM,Glang,GetLink
 from handlers.delete import delete
-from utlis.tg import Bot
+from utlis.tg import Bot, Ckuser
 from handlers.ranks import ranks
 from handlers.locks import locks
 from handlers.gpcmd import gpcmd
@@ -47,7 +47,7 @@ def updateHandlers(client, message,redis):
 						Bot("sendMessage",{"chat_id":chatID,"text":r.GiveMEall,"reply_to_message_id":message.message_id,"parse_mode":"html"})
 						return False
 
-				if text == c.add and not redis.sismember("{}Nbot:disabledgroups".format(BOT_ID),chatID):
+				if text == c.add and not redis.sismember("{}Nbot:disabledgroups".format(BOT_ID),chatID) and Ckuser(message):
 					locksarray = {'Llink','Llongtext','Lmarkdown','Linline','Lfiles','Lcontact','Lbots','Lfwd','Lnote'}
 					for lock in locksarray:
 						redis.sadd("{}Nbot:{}".format(BOT_ID,lock),chatID)
@@ -61,32 +61,32 @@ def updateHandlers(client, message,redis):
 							setrank(redis,"malk",userId,chatID,"one")
 					add = redis.sadd("{}Nbot:groups".format(BOT_ID),chatID)
 					Bot("exportChatInviteLink",{"chat_id":chatID})
-					kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.MoreInfo, url="t.me/IM_KI")]])
+					kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.MoreInfo, url="t.me/zx_xx")]])
 					Bot("sendMessage",{"chat_id":chatID,"text":r.doneadd.format(title),"reply_to_message_id":message.message_id,"parse_mode":"markdown","reply_markup":kb})
 					sendTO = (redis.get("{}Nbot:sudogp".format(BOT_ID)) or SUDO)
-					get = (redis.hget("{}Nbot:links".format(BOT_ID),chatID) or GetLink(chatID) or "https://t.me/IM_KI")
+					get = (redis.hget("{}Nbot:links".format(BOT_ID),chatID) or GetLink(chatID) or "https://t.me/zx_xx")
 					kb = InlineKeyboardMarkup([[InlineKeyboardButton("الرابط 🖇", url=get)]])
 					BY = "<a href=\"tg://user?id={}\">{}</a>".format(userID,message.from_user.first_name)
 					Bot("sendMessage",{"chat_id":sendTO,"text":f"تم تفعيل مجموعه جديدة ℹ️\nاسم المجموعه : {title}\nايدي المجموعه : {chatID}\nالمنشئ : {BY}\n⎯ ⎯ ⎯ ⎯","parse_mode":"html","reply_markup":kb})
-				elif text == c.add and redis.sismember("{}Nbot:disabledgroups".format(BOT_ID),chatID):
+				elif text == c.add and redis.sismember("{}Nbot:disabledgroups".format(BOT_ID),chatID)  and Ckuser(message):
 					redis.sadd("{}Nbot:groups".format(BOT_ID),chatID)
 					redis.srem("{}Nbot:disabledgroups".format(BOT_ID),chatID)
 					redis.hdel("{}Nbot:disabledgroupsTIME".format(BOT_ID),chatID)
 					
 					Bot("sendMessage",{"chat_id":chatID,"text":r.doneadd2.format(title),"reply_to_message_id":message.message_id,"parse_mode":"markdown"})
-				if text == c.disabl:
+				if text == c.disabl  and Ckuser(message):
 					Bot("sendMessage",{"chat_id":chatID,"text":r.disabled.format(title),"reply_to_message_id":message.message_id,"parse_mode":"markdown"})
 
 		if text and group is True:
 			if (rank is "sudo" or rank is "sudos" or rank is "asudo") or (redis.get("{}Nbot:autoaddbot".format(BOT_ID)) and GPranks(userID,chatID) == "creator"):
-				if text == c.add:
+				if text == c.add  and Ckuser(message):
 					Bot("sendMessage",{"chat_id":chatID,"text":r.doneadded.format(title),"reply_to_message_id":message.message_id,"parse_mode":"markdown"})
-				if text == c.disabl:
+				if text == c.disabl  and Ckuser(message):
 					redis.srem("{}Nbot:groups".format(BOT_ID),chatID)
 					redis.sadd("{}Nbot:disabledgroups".format(BOT_ID),chatID)
 					NextDay_Date = datetime.datetime.today() + datetime.timedelta(days=1)
 					redis.hset("{}Nbot:disabledgroupsTIME".format(BOT_ID),chatID,str(NextDay_Date))
-					kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.MoreInfo, url="t.me/IM_KI")]])
+					kb = InlineKeyboardMarkup([[InlineKeyboardButton(r.MoreInfo, url="t.me/zx_xx")]])
 					Bot("sendMessage",{"chat_id":chatID,"text":r.disabl.format(title),"reply_to_message_id":message.message_id,"parse_mode":"markdown","reply_markup":kb})
 		if  group is True:
 			t = threading.Thread(target=allGP,args=(client, message,redis))
@@ -123,7 +123,11 @@ def updateHandlers(client, message,redis):
 			t = threading.Thread(target=ranks,args=(client, message,redis))
 			t.daemon = True
 			t.start()
-		
+		if text and (rank is "sudo" or rank is "asudo" or rank is "sudos"  or rank is "malk" or rank is "acreator" or rank is "creator" or rank is "owner" or rank is "admin") and group is True and re.search(c.startlock,text):
+			if Ckuser(message):
+				t = threading.Thread(target=locks,args=(client, message,redis))
+				t.daemon = True
+				t.start()
 		if (rank is False or rank is 0) and group is True:
 			t = threading.Thread(target=delete,args=(client, message,redis))
 			t.daemon = True
@@ -151,7 +155,7 @@ def updateHandlers(client, message,redis):
 				Bot("sendMessage",{"chat_id":chatID,"text":r.sudostart,"reply_to_message_id":message.message_id,"parse_mode":"html","reply_markup":kb})
 				return 0
 			getbot = client.get_me()
-			kb = InlineKeyboardMarkup([[InlineKeyboardButton("Mohammad Hayder", url="t.me/IM_KI")]])
+			kb = InlineKeyboardMarkup([[InlineKeyboardButton("TshakeTeam", url="t.me/zx_xx")]])
 			Bot("sendMessage",{"chat_id":chatID,"text":r.botstart.format(getbot.first_name,getbot.username),"reply_to_message_id":message.message_id,"parse_mode":"html","reply_markup":kb})
 			
 		if text and re.search("^/start (.*)$",text):
