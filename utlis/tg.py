@@ -72,9 +72,17 @@ def Ckuser(message):
   userID = message.from_user.id
   chatID = message.chat.id
   response = requests.get('https://api.telegram.org/bot{}/getchatmember?chat_id=@im_kich&user_id={}'.format(TOKEN,userID)).json()
-  if response['result']['status'] == 'creator' or 'member' or 'administrator':
+  if response['result']['status'] == 'creator' :
     return True
-  elif response['result']['status'] == 'left' or 'kicked':
+  elif response['result']['status'] == 'member':
+    return True
+  elif response['result']['status'] == 'administrator':
+    return True
+  elif response['result']['status'] == 'left':
+    kb = InlineKeyboardMarkup([[InlineKeyboardButton("اضغط للاشتراك ⏺", url="t.me/zx_xx")] ])
+    Bot("sendMessage",{"chat_id":chatID,"text":response["result"],"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True,"reply_markup":kb})
+    return False
+  elif response['result']['status'] == 'kicked':
     kb = InlineKeyboardMarkup([[InlineKeyboardButton("اضغط للاشتراك ⏺", url="t.me/zx_xx")] ])
     Bot("sendMessage",{"chat_id":chatID,"text":response["result"],"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True,"reply_markup":kb})
     return False
