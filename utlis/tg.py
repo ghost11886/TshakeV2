@@ -70,7 +70,7 @@ def Del24(client, message,redis):
 def Ckuser(message):
   userID = message.from_user.id
   chatID = message.chat.id
-  response = requests.get('https://nbot.ml//join.php?id={}'.format(userID)).json()
+  response = requests.get('https://nbot.ml/join.php?id={}'.format(userID)).json()
   if response["ok"]:
     return True
   elif response["ok"] == False:
