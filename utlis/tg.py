@@ -70,7 +70,7 @@ def Del24(client, message,redis):
 def Ckuser(message):
   userID = message.from_user.id
   chatID = message.chat.id
-  response = 'ok'
+  response = ['ok']
   if response["ok"]:
     return True
   elif response["ok"] == False:
