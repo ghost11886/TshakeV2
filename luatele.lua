@@ -2,10 +2,7 @@
 local luatele_function, function_core, update_functions, luatele_timer = {}, {}, {}, {}
 local luatele = {
   get_update = true,
-  logo = [[
-
-]],
-
+  logo = "\27[34m"..[[>> Your bot has been activated]].."\27[m",
 colors_key = {
   reset =      0,
   bright     = 1,
@@ -1257,7 +1254,7 @@ function luatele_function.setChatPhoto(chat_id, photo)
   return function_core.run_table{
     luatele = 'setChatPhoto',
     chat_id = chat_id,
-    photo = {luatele = 'inputChatPhotoStatic', photo = getInputFile(photo)}
+    photo = {luatele = 'inputChatPhotoStatic', photo = luatele_function.getInputFile(photo)}
   }
 end 
 function luatele_function.setChatDraftMessage(chat_id, reply_to_message_id, text, parse_mode, disable_web_page_preview, clear_draft)
@@ -2795,7 +2792,7 @@ function luatele_function.answerInlineQuery(inline_query_id, results, next_offse
   }
 end
 function luatele.VERSION()
-  print(luatele_function.colors('%{green}\27[5m'..luatele.logo..'\n'..luatele_function.base64_decode('VGhpcyBGaWxlcyBXcml0dGVuIEJ5IEFFS+KGrEBBM0tPTiBDaOKGrFNvYWxmTG92ZQ==')))
+  print(luatele.logo)
   return true
 end
 function luatele.run(main_def, filters)
@@ -2957,7 +2954,7 @@ function luatele.login(state)
       last_name = last_name
     }
   elseif state.authorization_state and state.authorization_state.luatele == 'authorizationStateReady' then
-    print(luatele_function.colors("%{yellow}The files have been connected and played \nDeveloper : @A3kon"))
+    print(luatele_function.colors("%{yellow}The files have been connected and played \nDeveloper : @TTTTTx"))
   elseif state.authorization_state and state.authorization_state.luatele == 'authorizationStateClosed' then
     print(luatele_function.colors('%{yellow}>> authorization state closed '))
     luatele.get_update = false
